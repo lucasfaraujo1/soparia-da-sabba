@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cardápio | Restaurante e Soparia da Sabbá</title>
+  <meta name="description" content="Cardápio digital do Restaurante e Soparia da Sabbá em Manaus/AM. Sopas, rodízio, massas, lasanhas, pratos quentes, pizzas, sanduíches, pastéis, sobremesas e bebidas.">
+  <meta name="theme-color" content="#FF9400">
+
+  <!-- Open Graph / Compartilhamento no WhatsApp -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Cardápio | Restaurante e Soparia da Sabbá">
+  <meta property="og:description" content="Confira nosso cardápio completo, horários, localização e link para pedidos delivery em Manaus/AM.">
+  <meta property="og:image" content="assets/img/banner-sopa.jpg">
+
+  <link rel="icon" type="image/png" href="assets/img/logo.png">
+  <link rel="apple-touch-icon" href="assets/img/logo.png">
+
+  <!-- Fontes (com fallback seguro caso abra offline) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,500;0,600;0,700;1,400&family=Montserrat:wght@600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <!-- Cabeçalho Principal -->
+  <header class="site-header" id="siteHeader">
+    <div class="container header-inner">
+      <a href="#topo" class="brand" aria-label="Restaurante e Soparia da Sabbá - Início">
+        <img src="assets/img/logo.png" alt="Logo Restaurante e Soparia da Sabbá" class="brand-logo" width="60" height="58">
+        <div class="brand-text">
+          <span class="brand-sub">Restaurante e</span>
+          <span class="brand-name">Soparia da Sabbá</span>
+        </div>
+      </a>
+
+      <nav class="desktop-nav" aria-label="Navegação principal">
+        <a href="#cardapio" class="nav-link active" data-nav="cardapio">Cardápio</a>
+        <a href="#contato" class="nav-link" data-nav="contato">Contato &amp; Localização</a>
+        <a href="https://linktr.ee/sopariadasabba" target="_blank" rel="noopener noreferrer" class="btn-delivery">
+          <span>Pedidos Delivery</span>
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" width="16" height="16">
+            <path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 0 0 1.06 0l7.22-7.22v5.69a.75.75 0 0 0 1.5 0v-7.5a.75.75 0 0 0-.75-.75h-7.5a.75.75 0 0 0 0 1.5h5.69l-7.22 7.22a.75.75 0 0 0 0 1.06Z" clip-rule="evenodd" />
+          </svg>
+        </a>
+      </nav>
+
+      <div class="mobile-header-actions">
+        <a href="https://linktr.ee/sopariadasabba" target="_blank" rel="noopener noreferrer" class="btn-delivery btn-delivery--compact">
+          Delivery
+        </a>
+        <button type="button" class="menu-toggle" id="menuToggle" aria-label="Abrir menu" aria-expanded="false" aria-controls="mobileDrawer">
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Menu Mobile -->
+    <nav class="mobile-drawer" id="mobileDrawer" aria-label="Menu mobile" hidden>
+      <div class="container mobile-drawer-inner">
+        <a href="#cardapio" class="mobile-nav-link">Cardápio</a>
+        <a href="#contato" class="mobile-nav-link">Contato &amp; Localização</a>
+        <a href="https://linktr.ee/sopariadasabba" target="_blank" rel="noopener noreferrer" class="mobile-nav-link mobile-nav-link--highlight">
+          Pedidos Delivery (Linktree)
+        </a>
+        <div class="mobile-drawer-meta">
+          <a href="https://api.whatsapp.com/send?phone=5592993394839" target="_blank" rel="noopener noreferrer">WhatsApp: (92) 99339-4839</a>
+          <a href="https://www.instagram.com/sopariadasabba/" target="_blank" rel="noopener noreferrer">Instagram @sopariadasabba</a>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main id="topo">
+    <!-- Faixa de Avisos -->
+    <section class="notice-strip" aria-label="Informações importantes">
+      <div class="container notice-strip-inner">
+        <p class="payment-notice">
+          <svg viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" width="18" height="18">
+            <path fill-rule="evenodd" d="M2.5 4A1.5 1.5 0 0 0 1 5.5V6h18v-.5A1.5 1.5 0 0 0 17.5 4h-15ZM19 8.5H1v6A1.5 1.5 0 0 0 2.5 16h15a1.5 1.5 0 0 0 1.5-1.5v-6ZM3 13.25a.75.75 0 0 1 .75-.75h1.5a.75.75 0 0 1 0 1.5h-1.5a.75.75 0 0 1-.75-.75Zm4.75-.75a.75.75 0 0 0 0 1.5h3.5a.75.75 0 0 0 0-1.5h-3.5Z" clip-rule="evenodd" />
+          </svg>
+          <span>
+            Aceitamos pagamento em <strong>dinheiro, PIX, cartão débito e crédito VISA, MASTERCARD e ELO</strong>
+            <strong class="notice-warning">(não aceitamos vale-refeição!)</strong>
+          </span>
+        </p>
+        <span class="notice-pill">Aceitamos encomendas!</span>
+      </div>
+    </section>
+
+    <div class="menu-area">
+      <!-- Cabeçalho do Cardápio + Busca -->
+      <section class="menu-intro" id="cardapio">
+        <div class="container menu-intro-inner">
+          <div class="menu-heading-group">
+            <h1>Cardápio</h1>
+            <div class="menu-submeta">
+              <span class="service-fee">Taxa de Serviço 10%</span>
+              <span class="meta-sep" aria-hidden="true">•</span>
+              <span class="consultation-note">Cardápio para consulta</span>
+            </div>
+          </div>
+
+          <div class="search-box">
+            <svg class="search-icon" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" width="18" height="18">
+              <path fill-rule="evenodd" d="M9 3.5a5.5 5.5 0 1 0 0 11 5.5 5.5 0 0 0 0-11ZM2 9a7 7 0 1 1 12.452 4.391l3.328 3.329a.75.75 0 1 1-1.06 1.06l-3.329-3.328A7 7 0 0 1 2 9Z" clip-rule="evenodd" />
+            </svg>
+            <input
+              type="search"
+              id="menuSearch"
+              placeholder="Buscar prato, sopa, massa, bebida..."
+              aria-label="Buscar no cardápio"
+              autocomplete="off"
+            >
+            <button type="button" id="clearSearch" class="clear-search" aria-label="Limpar busca" hidden>
+              &times;
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Barra Fixa de Categorias -->
+      <div class="category-bar-wrap" id="categoryBarWrap">
+        <div class="container">
+          <nav class="category-bar" id="categoryNav" aria-label="Categorias do cardápio"></nav>
+        </div>
+      </div>
+
+      <!-- Container do Cardápio Renderizado via JS -->
+      <section class="menu-content" aria-label="Itens do cardápio">
+        <div class="container">
+          <div id="searchSummary" class="search-summary" hidden></div>
+          <div id="menuContainer" class="menu-sections"></div>
+          <div id="emptyState" class="empty-state" hidden>
+            <p class="empty-state-title">Nenhum item encontrado</p>
+            <p class="empty-state-text">Tente buscar por outro nome ou ingrediente (ex: sopa, camarão, lasanha, suco).</p>
+            <button type="button" id="resetSearchBtn" class="btn-secondary">Ver todo o cardápio</button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <!-- Seção Contato & Localização -->
+    <section class="contact-section" id="contato" aria-labelledby="contatoHeading">
+      <div class="contact-hero">
+        <img src="assets/img/banner-contato.jpg" alt="Comida tradicional do Restaurante e Soparia da Sabbá" class="contact-hero-img" decoding="async">
+        <div class="contact-hero-overlay">
+          <div class="container">
+            <span class="contact-kicker">Restaurante e Soparia da Sabbá</span>
+            <h2 id="contatoHeading">Contato &amp; Localização</h2>
+          </div>
+        </div>
+      </div>
+
+      <div class="container contact-body">
+        <div class="contact-grid">
+          <!-- Card Endereço -->
+          <article class="contact-card">
+            <div class="contact-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="24" height="24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
+              </svg>
+            </div>
+            <h3>Endereço</h3>
+            <p class="contact-detail">
+              Av. Gov. José Lindoso, 1394<br>
+              Novo Aleixo, Manaus/AM<br>
+              CEP 69058-600
+            </p>
+            <a href="https://maps.app.goo.gl/cdSXMoAjE1xvRJGz9" target="_blank" rel="noopener noreferrer" class="contact-action">
+              Abrir no Google Maps
+              <svg viewBox="0 0 20 20" fill="currentColor" width="16" height="16" aria-hidden="true">
+                <path fill-rule="evenodd" d="M5.22 14.78a.75.75 0 0 0 1.06 0l7.22-7.22v5.69a.75.75 0 0 0 1.5 0v-7.5a.75.75 0 0 0-.75-.75h-7.5a.75.75 0 0 0 0 1.5h5.69l-7.22 7.22a.75.75 0 0 0 0 1.06Z" clip-rule="evenodd" />
+              </svg>
+            </a>
+          </article>
+
+          <!-- Card Horários -->
+          <article class="contact-card">
+            <div class="contact-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="24" height="24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6h4.5m4.5 0a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+              </svg>
+            </div>
+            <h3>Horários</h3>
+            <div class="hours-list">
+              <div class="hours-item">
+                <span class="hours-label">Aberto ao Público</span>
+                <span class="hours-value">Todos os dias • De 16:30 às 22:30</span>
+              </div>
+              <div class="hours-item">
+                <span class="hours-label">Entrega (Delivery)</span>
+                <span class="hours-value">Todos os dias • De 11:00 às 22:30</span>
+              </div>
+            </div>
+          </article>
+
+          <!-- Card Contato & Delivery -->
+          <article class="contact-card">
+            <div class="contact-card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" width="24" height="24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
+              </svg>
+            </div>
+            <h3>Contato &amp; Delivery</h3>
+            <p class="contact-detail">
+              <a href="tel:+5592993394839" class="phone-link">+55 (92) 99339-4839</a>
+            </p>
+            <div class="contact-buttons">
+              <a href="https://linktr.ee/sopariadasabba" target="_blank" rel="noopener noreferrer" class="btn-primary-full">
+                Pedidos Delivery
+              </a>
+              <div class="social-links" aria-label="Redes sociais e WhatsApp">
+                <a href="https://api.whatsapp.com/send?phone=5592993394839" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="WhatsApp">
+                  <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true">
+                    <path d="M12.031 2c-5.516 0-9.999 4.483-9.999 10 0 1.763.46 3.485 1.334 5.004L2 22l5.134-1.347a9.96 9.96 0 0 0 4.897 1.281h.004c5.515 0 9.998-4.484 9.998-10 0-2.671-1.04-5.182-2.929-7.071A9.934 9.934 0 0 0 12.031 2Zm5.82 14.205c-.246.693-1.43 1.326-1.995 1.41-.515.077-1.184.109-1.91-.122-.441-.14-1.008-.327-1.734-.64-3.051-1.318-5.044-4.389-5.196-4.591-.152-.202-1.241-1.651-1.241-3.15 0-1.498.785-2.235 1.064-2.54.279-.304.608-.38.81-.38.203 0 .405.002.582.011.187.009.437-.071.684.522.253.608.861 2.1.937 2.252.076.152.126.329.025.531-.101.203-.152.329-.304.506-.152.177-.319.396-.456.532-.152.152-.31.317-.133.621.177.304.787 1.299 1.691 2.104 1.161 1.036 2.141 1.357 2.445 1.509.304.152.481.127.658-.076.177-.202.76-.886.962-1.19.203-.304.405-.253.684-.152.279.101 1.773.836 2.077.988.304.152.506.228.582.354.076.127.076.734-.17 1.427Z"/>
+                  </svg>
+                  <span>WhatsApp</span>
+                </a>
+                <a href="https://www.instagram.com/sopariadasabba/" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Instagram">
+                  <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true">
+                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069ZM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0Zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324ZM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8Zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881Z"/>
+                  </svg>
+                  <span>Instagram</span>
+                </a>
+                <a href="https://www.facebook.com/sopariadasabba/" target="_blank" rel="noopener noreferrer" class="social-btn" aria-label="Facebook">
+                  <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20" aria-hidden="true">
+                    <path d="M22.675 0H1.325C.593 0 0 .593 0 1.325v21.351C0 23.407.593 24 1.325 24H12.82v-9.294H9.692v-3.622h3.128V8.413c0-3.1 1.893-4.788 4.659-4.788 1.325 0 2.463.099 2.795.143v3.24l-1.918.001c-1.504 0-1.795.715-1.795 1.763v2.313h3.587l-.467 3.622h-3.12V24h6.116c.73 0 1.323-.593 1.323-1.325V1.325C24 .593 23.407 0 22.675 0Z"/>
+                  </svg>
+                  <span>Facebook</span>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+
+        <!-- Mapa Interativo -->
+        <div class="map-wrapper">
+          <iframe
+            title="Mapa de localização - Restaurante e Soparia da Sabbá"
+            src="https://maps.google.com/maps?q=Av.%20Gov.%20Jos%C3%A9%20Lindoso%2C%201394%20-%20Novo%20Aleixo%2C%20Manaus%20-%20AM%2C%2069058-600&t=&z=16&ie=UTF8&iwloc=&output=embed"
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Rodapé -->
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <img src="assets/img/logo.png" alt="" class="footer-logo" width="44" height="42">
+        <div>
+          <p class="footer-copy">&copy; <span id="currentYear">2026</span> por Restaurante e Soparia da Sabbá</p>
+          <p class="footer-sub">Av. Gov. José Lindoso, 1394 - Novo Aleixo, Manaus/AM • Cardápio digital para consulta</p>
+        </div>
+      </div>
+      <div class="footer-actions">
+        <div class="visitor-counter" id="visitorCounter" title="Total de acessos registrados no site">
+          <svg viewBox="0 0 20 20" fill="currentColor" width="15" height="15" aria-hidden="true">
+            <path d="M10 12.5a2.5 2.5 0 1 0 0-5 2.5 2.5 0 0 0 0 5Z" />
+            <path fill-rule="evenodd" d="M.664 10.59a1.651 1.651 0 0 1 0-1.186A10.004 10.004 0 0 1 10 3c4.257 0 7.893 2.66 9.336 6.41.147.381.146.804 0 1.186A10.004 10.004 0 0 1 10 17c-4.257 0-7.893-2.66-9.336-6.41ZM14 10a4 4 0 1 1-8 0 4 4 0 0 1 8 0Z" clip-rule="evenodd" />
+          </svg>
+          <span id="visitorCountText">Visitas: —</span>
+        </div>
+        <a href="#topo" class="footer-top-link">Voltar ao topo &uarr;</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Botão Flutuante Voltar ao Topo -->
+  <button type="button" id="backToTop" class="back-to-top" aria-label="Voltar ao topo" hidden>
+    <svg viewBox="0 0 20 20" fill="currentColor" width="20" height="20" aria-hidden="true">
+      <path fill-rule="evenodd" d="M10 17a.75.75 0 0 1-.75-.75V5.612L5.29 9.77a.75.75 0 0 1-1.08-1.04l5.25-5.5a.75.75 0 0 1 1.08 0l5.25 5.5a.75.75 0 1 1-1.08 1.04l-3.96-4.158V16.25A.75.75 0 0 1 10 17Z" clip-rule="evenodd" />
+    </svg>
+  </button>
+
+  <script src="data/menu.js"></script>
+  <script src="js/app.js"></script>
+  <script data-goatcounter="https://lucasfaraujo.goatcounter.com/count" async src="https://gc.zgo.at/count.js"></script>
+</body>
+</html>

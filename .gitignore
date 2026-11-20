@@ -1,0 +1,6 @@
+# Imagens originais sem compressão ficam apenas em backup local
+backup/
+
+# Arquivos temporários de sistema
+.DS_Store
+Thumbs.db
