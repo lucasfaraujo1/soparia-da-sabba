@@ -22,12 +22,137 @@
   const fontResetBtn = document.getElementById("fontReset");
   const fontIncreaseBtn = document.getElementById("fontIncrease");
   const contrastToggleBtn = document.getElementById("contrastToggle");
+  const langPtBtn = document.getElementById("langPt");
+  const langEnBtn = document.getElementById("langEn");
   const a11yLive = document.getElementById("a11yLive");
+
+  const UI_STRINGS = {
+    pt: {
+      htmlLang: "pt-BR",
+      pageTitle: "Consulta Cardápio | Restaurante e Soparia da Sabbá",
+      skipLink: "Pular para o cardápio",
+      brandSub: "Restaurante e",
+      navMenu: "Cardápio",
+      navContact: "Contato & Localização",
+      navDelivery: "Pedidos Delivery",
+      navDeliveryCompact: "Delivery",
+      navDeliveryMobile: "Pedidos Delivery (Linktree)",
+      paymentNoticeHtml:
+        'Aceitamos pagamento em <strong>dinheiro, PIX, cartão débito e crédito VISA, MASTERCARD e ELO</strong> <strong class="notice-warning">(não aceitamos vale-refeição!)</strong>',
+      ordersNotice: "Aceitamos encomendas!",
+      a11yLabel: "Acessibilidade",
+      contrastBtn: "Alto Contraste",
+      menuTitle: "Cardápio",
+      serviceFee: "Taxa de Serviço 10%",
+      consultationNote: "Cardápio para consulta",
+      searchPlaceholder: "Buscar prato, sopa, massa, bebida...",
+      searchAriaLabel: "Buscar no cardápio",
+      emptyTitle: "Nenhum item encontrado",
+      emptyText:
+        "Tente buscar por outro nome ou ingrediente (ex: sopa, camarão, lasanha, suco).",
+      emptyReset: "Ver todo o cardápio",
+      contactKicker: "Restaurante e Soparia da Sabbá",
+      contactHeading: "Contato & Localização",
+      addressTitle: "Endereço",
+      openMaps: "Abrir no Google Maps",
+      hoursTitle: "Horários",
+      dineInLabel: "Aberto ao Público",
+      dineInValue: "Todos os dias • De 16:30 às 22:30",
+      deliveryLabel: "Entrega (Delivery)",
+      deliveryValue: "Todos os dias • De 11:00 às 22:30",
+      contactCardTitle: "Contato & Delivery",
+      footerCopyHtml: '&copy; <span id="currentYear">2026</span> por Restaurante e Soparia da Sabbá',
+      footerSub:
+        "Av. Gov. José Lindoso, 1394 - Novo Aleixo, Manaus/AM • Cardápio digital para consulta",
+      backToTopLink: "Voltar ao topo ↑",
+      backToTopAria: "Voltar ao topo",
+      visitSingular: "visita",
+      visitPlural: "visitas",
+      visitsFallback: "Visitas: —",
+      searchOne: "item encontrado",
+      searchMany: "itens encontrados",
+      searchFor: "para",
+      fontAnnounce: (pct) => `Tamanho do texto ajustado para ${pct} por cento.`,
+      contrastOn: "Modo alto contraste ativado.",
+      contrastOff: "Modo alto contraste desativado.",
+      langAnnounce: "Idioma alterado para português."
+    },
+    en: {
+      htmlLang: "en",
+      pageTitle: "Menu | Restaurante e Soparia da Sabbá",
+      skipLink: "Skip to menu",
+      brandSub: "Restaurant &",
+      navMenu: "Menu",
+      navContact: "Contact & Location",
+      navDelivery: "Delivery Orders",
+      navDeliveryCompact: "Delivery",
+      navDeliveryMobile: "Delivery Orders (Linktree)",
+      paymentNoticeHtml:
+        '<strong>Cash, PIX, and Visa, Mastercard &amp; Elo debit/credit cards</strong> accepted <strong class="notice-warning">(meal vouchers not accepted!)</strong>',
+      ordersNotice: "Catering & pre-orders welcome!",
+      a11yLabel: "Accessibility",
+      contrastBtn: "High Contrast",
+      menuTitle: "Menu",
+      serviceFee: "10% Service Charge",
+      consultationNote: "Menu for browsing only",
+      searchPlaceholder: "Search dish, soup, pasta, drink...",
+      searchAriaLabel: "Search the menu",
+      emptyTitle: "No items found",
+      emptyText:
+        "Try searching for another dish or ingredient (e.g., soup, shrimp, lasagna, juice).",
+      emptyReset: "Show full menu",
+      contactKicker: "Restaurante e Soparia da Sabbá",
+      contactHeading: "Contact & Location",
+      addressTitle: "Address",
+      openMaps: "Open in Google Maps",
+      hoursTitle: "Opening Hours",
+      dineInLabel: "Dine-In",
+      dineInValue: "Daily • 4:30 PM – 10:30 PM",
+      deliveryLabel: "Delivery",
+      deliveryValue: "Daily • 11:00 AM – 10:30 PM",
+      contactCardTitle: "Contact & Delivery",
+      footerCopyHtml: '&copy; <span id="currentYear">2026</span> Restaurante e Soparia da Sabbá',
+      footerSub:
+        "Av. Gov. José Lindoso, 1394 - Novo Aleixo, Manaus/AM • Digital menu for browsing",
+      backToTopLink: "Back to top ↑",
+      backToTopAria: "Back to top",
+      visitSingular: "visit",
+      visitPlural: "visits",
+      visitsFallback: "Visits: —",
+      searchOne: "item found",
+      searchMany: "items found",
+      searchFor: "for",
+      fontAnnounce: (pct) => `Text size set to ${pct} percent.`,
+      contrastOn: "High contrast mode enabled.",
+      contrastOff: "High contrast mode disabled.",
+      langAnnounce: "Language changed to English."
+    }
+  };
+
+  let currentLang = "pt";
+  try {
+    const savedLang = localStorage.getItem("soparia_lang");
+    if (savedLang === "en" || savedLang === "pt") {
+      currentLang = savedLang;
+    }
+  } catch (_) {}
 
   let activeCategoryId = data.categories[0] ? data.categories[0].id : "";
   let scrollRafPending = false;
   let pillAnimFrame = null;
   let manualScrollLockUntil = 0;
+  let lastVisitorTotal = null;
+
+  function t(key) {
+    return UI_STRINGS[currentLang][key];
+  }
+
+  function pick(ptVal, enVal) {
+    if (currentLang === "en" && typeof enVal === "string") {
+      return enVal;
+    }
+    return ptVal || "";
+  }
 
   function escapeHtml(str) {
     return String(str)
@@ -47,9 +172,10 @@
   }
 
   function formatPrice(value) {
+    const locale = currentLang === "en" ? "en-US" : "pt-BR";
     return (
       "R$ " +
-      Number(value).toLocaleString("pt-BR", {
+      Number(value).toLocaleString(locale, {
         minimumFractionDigits: 2,
         maximumFractionDigits: 2
       })
@@ -58,18 +184,22 @@
 
   function renderItem(item) {
     const featuredClass = item.featured ? " menu-item--featured" : "";
-    const badgeHtml = item.badge
-      ? `<span class="item-badge">${escapeHtml(item.badge)}</span>`
+    const itemName = pick(item.name, item.nameEn);
+    const itemDesc = pick(item.description, item.descriptionEn);
+    const itemBadge = pick(item.badge, item.badgeEn);
+
+    const badgeHtml = itemBadge
+      ? `<span class="item-badge">${escapeHtml(itemBadge)}</span>`
       : "";
-    const descHtml = item.description
-      ? `<p class="menu-item-desc">${escapeHtml(item.description)}</p>`
+    const descHtml = itemDesc
+      ? `<p class="menu-item-desc">${escapeHtml(itemDesc)}</p>`
       : "";
 
     return `
       <article class="menu-item${featuredClass}">
         <div class="menu-item-top">
           <div class="menu-item-title-wrap">
-            <h3 class="menu-item-name">${escapeHtml(item.name)}</h3>
+            <h3 class="menu-item-name">${escapeHtml(itemName)}</h3>
             ${badgeHtml}
           </div>
           <span class="menu-item-dots" aria-hidden="true"></span>
@@ -81,8 +211,10 @@
   }
 
   function renderCategoryHeader(category) {
-    const subtitleHtml = category.subtitle
-      ? `<p class="category-subtitle">${escapeHtml(category.subtitle)}</p>`
+    const catTitle = pick(category.title, category.titleEn);
+    const catSubtitle = pick(category.subtitle, category.subtitleEn);
+    const subtitleHtml = catSubtitle
+      ? `<p class="category-subtitle">${escapeHtml(catSubtitle)}</p>`
       : "";
 
     if (category.banner) {
@@ -90,12 +222,12 @@
         <div class="category-banner">
           <img
             src="${escapeHtml(category.banner)}"
-            alt="${escapeHtml(category.title)}"
+            alt="${escapeHtml(catTitle)}"
             class="category-banner-img"
             decoding="async"
           >
           <div class="category-banner-overlay">
-            <h2 class="category-title">${escapeHtml(category.title)}</h2>
+            <h2 class="category-title">${escapeHtml(catTitle)}</h2>
             ${subtitleHtml}
           </div>
         </div>
@@ -104,7 +236,7 @@
 
     return `
       <div class="category-header-plain">
-        <h2 class="category-title">${escapeHtml(category.title)}</h2>
+        <h2 class="category-title">${escapeHtml(catTitle)}</h2>
         ${subtitleHtml}
       </div>
     `;
@@ -112,16 +244,27 @@
 
   function renderCategoryPills(categories) {
     categoryNav.innerHTML = categories
-      .map(
-        (cat, idx) => `
+      .map((cat) => {
+        const isActive = cat.id === activeCategoryId;
+        const catTitle = pick(cat.title, cat.titleEn);
+        return `
           <a
             href="#cat-${escapeHtml(cat.id)}"
-            class="category-pill${idx === 0 ? " is-active" : ""}"
+            class="category-pill${isActive ? " is-active" : ""}"
             data-cat-pill="${escapeHtml(cat.id)}"
-          >${escapeHtml(cat.title)}</a>
-        `
-      )
+          >${escapeHtml(catTitle)}</a>
+        `;
+      })
       .join("");
+  }
+
+  function itemMatchesQuery(item, normalized) {
+    return (
+      normalizeText(item.name).includes(normalized) ||
+      normalizeText(item.description).includes(normalized) ||
+      normalizeText(item.nameEn).includes(normalized) ||
+      normalizeText(item.descriptionEn).includes(normalized)
+    );
   }
 
   function filterCategories(query) {
@@ -134,28 +277,24 @@
     const filtered = [];
 
     for (const cat of data.categories) {
-      const catMatches = normalizeText(cat.title).includes(normalized);
-      const matchedItems = cat.items.filter((item) => {
-        if (catMatches) return true;
-        return (
-          normalizeText(item.name).includes(normalized) ||
-          normalizeText(item.description).includes(normalized)
-        );
-      });
+      const catMatches =
+        normalizeText(cat.title).includes(normalized) ||
+        normalizeText(cat.titleEn).includes(normalized);
+      const matchedItems = cat.items.filter((item) =>
+        catMatches ? true : itemMatchesQuery(item, normalized)
+      );
 
       const matchedSubcategories = [];
       if (Array.isArray(cat.subcategories)) {
         for (const sub of cat.subcategories) {
-          const subMatches = normalizeText(sub.title).includes(normalized);
-          const subItems = sub.items.filter((item) => {
-            if (catMatches || subMatches) return true;
-            return (
-              normalizeText(item.name).includes(normalized) ||
-              normalizeText(item.description).includes(normalized)
-            );
-          });
+          const subMatches =
+            normalizeText(sub.title).includes(normalized) ||
+            normalizeText(sub.titleEn).includes(normalized);
+          const subItems = sub.items.filter((item) =>
+            catMatches || subMatches ? true : itemMatchesQuery(item, normalized)
+          );
           if (subItems.length > 0) {
-            matchedSubcategories.push({ title: sub.title, items: subItems });
+            matchedSubcategories.push({ ...sub, items: subItems });
             totalMatches += subItems.length;
           }
         }
@@ -181,8 +320,8 @@
     if (query.trim()) {
       clearSearchBtn.hidden = false;
       if (totalMatches > 0) {
-        const label = totalMatches === 1 ? "item encontrado" : "itens encontrados";
-        searchSummary.textContent = `${totalMatches} ${label} para "${query.trim()}"`;
+        const label = totalMatches === 1 ? t("searchOne") : t("searchMany");
+        searchSummary.textContent = `${totalMatches} ${label} ${t("searchFor")} "${query.trim()}"`;
         searchSummary.hidden = false;
       } else {
         searchSummary.hidden = true;
@@ -209,14 +348,15 @@
 
         const subcategoriesHtml = Array.isArray(cat.subcategories)
           ? cat.subcategories
-              .map(
-                (sub) => `
+              .map((sub) => {
+                const subTitle = pick(sub.title, sub.titleEn);
+                return `
                   <div class="subcategory-block">
-                    <h3 class="subcategory-title">${escapeHtml(sub.title)}</h3>
+                    <h3 class="subcategory-title">${escapeHtml(subTitle)}</h3>
                     <div class="menu-grid">${sub.items.map(renderItem).join("")}</div>
                   </div>
-                `
-              )
+                `;
+              })
               .join("")
           : "";
 
@@ -325,12 +465,16 @@
   window.addEventListener("wheel", releaseScrollLock, { passive: true });
   window.addEventListener("touchstart", releaseScrollLock, { passive: true });
   if ("onscrollend" in window) {
-    window.addEventListener("scrollend", () => {
-      if (manualScrollLockUntil) {
-        manualScrollLockUntil = 0;
-        applyScrollState();
-      }
-    }, { passive: true });
+    window.addEventListener(
+      "scrollend",
+      () => {
+        if (manualScrollLockUntil) {
+          manualScrollLockUntil = 0;
+          applyScrollState();
+        }
+      },
+      { passive: true }
+    );
   }
 
   function updateActiveCategoryFromScroll() {
@@ -390,7 +534,7 @@
     if (!mobileDrawer || !menuToggle) return;
     mobileDrawer.hidden = true;
     menuToggle.setAttribute("aria-expanded", "false");
-    menuToggle.setAttribute("aria-label", "Abrir menu");
+    menuToggle.setAttribute("aria-label", currentLang === "en" ? "Open menu" : "Abrir menu");
   }
 
   // Event Listeners
@@ -443,7 +587,16 @@
       const isOpen = !mobileDrawer.hidden;
       mobileDrawer.hidden = isOpen;
       menuToggle.setAttribute("aria-expanded", String(!isOpen));
-      menuToggle.setAttribute("aria-label", isOpen ? "Abrir menu" : "Fechar menu");
+      menuToggle.setAttribute(
+        "aria-label",
+        isOpen
+          ? currentLang === "en"
+            ? "Open menu"
+            : "Abrir menu"
+          : currentLang === "en"
+          ? "Close menu"
+          : "Fechar menu"
+      );
     });
   }
 
@@ -452,6 +605,18 @@
   });
 
   window.addEventListener("scroll", onScroll, { passive: true });
+
+  function renderVisitorText() {
+    if (!visitorCountText) return;
+    if (lastVisitorTotal === null) {
+      visitorCountText.textContent = t("visitsFallback");
+      return;
+    }
+    const locale = currentLang === "en" ? "en-US" : "pt-BR";
+    const formatted = lastVisitorTotal.toLocaleString(locale);
+    const label = lastVisitorTotal === 1 ? t("visitSingular") : t("visitPlural");
+    visitorCountText.textContent = `${formatted} ${label}`;
+  }
 
   function loadVisitorCount() {
     if (!visitorCountText) return;
@@ -471,13 +636,12 @@
       .then((payload) => {
         const raw = String(payload && payload.count ? payload.count : "0");
         const num = parseInt(raw.replace(/\D/g, ""), 10);
-        const total = Number.isFinite(num) ? num : 0;
-        const formatted = total.toLocaleString("pt-BR");
-        const label = total === 1 ? "visita" : "visitas";
-        visitorCountText.textContent = `${formatted} ${label}`;
+        lastVisitorTotal = Number.isFinite(num) ? num : 0;
+        renderVisitorText();
       })
       .catch(() => {
-        visitorCountText.textContent = "Visitas: —";
+        lastVisitorTotal = null;
+        renderVisitorText();
       });
   }
 
@@ -487,6 +651,61 @@
     requestAnimationFrame(() => {
       a11yLive.textContent = message;
     });
+  }
+
+  function applyLanguage(lang, announce) {
+    currentLang = lang === "en" ? "en" : "pt";
+    document.documentElement.lang = t("htmlLang");
+    document.title = t("pageTitle");
+
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      const key = el.dataset.i18n;
+      if (UI_STRINGS[currentLang][key] !== undefined) {
+        el.textContent = UI_STRINGS[currentLang][key];
+      }
+    });
+
+    document.querySelectorAll("[data-i18n-html]").forEach((el) => {
+      const key = el.dataset.i18nHtml;
+      if (UI_STRINGS[currentLang][key] !== undefined) {
+        el.innerHTML = UI_STRINGS[currentLang][key];
+      }
+    });
+
+    const yearEl = document.getElementById("currentYear");
+    if (yearEl) {
+      yearEl.textContent = String(new Date().getFullYear());
+    }
+
+    if (searchInput) {
+      searchInput.placeholder = t("searchPlaceholder");
+      searchInput.setAttribute("aria-label", t("searchAriaLabel"));
+    }
+
+    if (backToTopBtn) {
+      backToTopBtn.setAttribute("aria-label", t("backToTopAria"));
+    }
+
+    if (langPtBtn && langEnBtn) {
+      const isPt = currentLang === "pt";
+      langPtBtn.classList.toggle("is-active", isPt);
+      langPtBtn.setAttribute("aria-pressed", String(isPt));
+      langEnBtn.classList.toggle("is-active", !isPt);
+      langEnBtn.setAttribute("aria-pressed", String(!isPt));
+    }
+
+    try {
+      localStorage.setItem("soparia_lang", currentLang);
+    } catch (_) {}
+
+    renderCategoryPills(data.categories);
+    renderMenu(searchInput ? searchInput.value : "");
+    renderVisitorText();
+    applyScrollState();
+
+    if (announce) {
+      announceA11y(t("langAnnounce"));
+    }
   }
 
   function setupAccessibility() {
@@ -526,7 +745,7 @@
       } catch (_) {}
 
       if (announce) {
-        announceA11y(`Tamanho do texto ajustado para ${Math.round(scale)} por cento.`);
+        announceA11y(t("fontAnnounce")(Math.round(scale)));
       }
     }
 
@@ -544,9 +763,7 @@
       } catch (_) {}
 
       if (announce) {
-        announceA11y(
-          highContrast ? "Modo alto contraste ativado." : "Modo alto contraste desativado."
-        );
+        announceA11y(highContrast ? t("contrastOn") : t("contrastOff"));
       }
     }
 
@@ -584,6 +801,18 @@
       });
     }
 
+    if (langPtBtn) {
+      langPtBtn.addEventListener("click", () => {
+        if (currentLang !== "pt") applyLanguage("pt", true);
+      });
+    }
+
+    if (langEnBtn) {
+      langEnBtn.addEventListener("click", () => {
+        if (currentLang !== "en") applyLanguage("en", true);
+      });
+    }
+
     applyFontScale(false);
     applyContrast(false);
   }
@@ -594,8 +823,6 @@
   }
 
   setupAccessibility();
-  renderCategoryPills(data.categories);
-  renderMenu("");
-  applyScrollState();
+  applyLanguage(currentLang, false);
   setTimeout(loadVisitorCount, 650);
 })();

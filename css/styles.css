@@ -519,6 +519,47 @@ input {
   color: var(--text-dark);
 }
 
+.lang-switch {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background-color: var(--bg-surface);
+}
+
+.lang-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding-left: 9px;
+  padding-right: 4px;
+  color: var(--brand-orange);
+}
+
+.lang-btn {
+  padding-inline: 9px;
+  font-family: var(--font-display);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--text-secondary);
+}
+
+.lang-btn + .lang-btn {
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.lang-btn.is-active {
+  background-color: var(--brand-orange);
+  color: var(--text-dark);
+}
+
+.lang-btn.is-active:hover {
+  background-color: var(--brand-orange);
+  color: var(--text-dark);
+}
+
 /* =========================================================
    Menu Intro & Search
    ========================================================= */
@@ -1489,6 +1530,7 @@ html.high-contrast .payment-notice .notice-warning {
 
 html.high-contrast .a11y-font-group,
 html.high-contrast .a11y-btn--contrast,
+html.high-contrast .lang-switch,
 html.high-contrast .search-box input,
 html.high-contrast .category-pill,
 html.high-contrast .menu-item,
@@ -1498,8 +1540,23 @@ html.high-contrast .empty-state {
   background-color: #ffffff;
 }
 
-html.high-contrast .a11y-font-group .a11y-btn + .a11y-btn {
+html.high-contrast .a11y-font-group .a11y-btn + .a11y-btn,
+html.high-contrast .lang-btn + .lang-btn {
   border-left-color: #222222;
+}
+
+html.high-contrast .lang-icon {
+  color: #111111;
+}
+
+html.high-contrast .lang-btn {
+  color: #111111;
+}
+
+html.high-contrast .lang-btn.is-active,
+html.high-contrast .lang-btn.is-active:hover {
+  background-color: #111111;
+  color: #ffffff;
 }
 
 html.high-contrast .a11y-btn:hover:not(:disabled) {
