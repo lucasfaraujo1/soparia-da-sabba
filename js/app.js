@@ -37,8 +37,8 @@
       navDelivery: "Pedidos Delivery",
       navDeliveryCompact: "Delivery",
       navDeliveryMobile: "Pedidos Delivery (Linktree)",
-      paymentNoticeHtml:
-        'Aceitamos pagamento em <strong>dinheiro, PIX, cartão débito e crédito VISA, MASTERCARD e ELO</strong> <strong class="notice-warning">(não aceitamos vale-refeição!)</strong>',
+      paymentNotice:
+        'Aceitamos pagamento em <strong>dinheiro, pix, cartões de débito e crédito (VISA, MASTERCARD e ELO)</strong>. <strong class="notice-warning">Não aceitamos vale-refeição.</strong>',
       ordersNotice: "Aceitamos encomendas!",
       a11yLabel: "Acessibilidade",
       contrastBtn: "Alto Contraste",
@@ -61,7 +61,7 @@
       deliveryLabel: "Entrega (Delivery)",
       deliveryValue: "Todos os dias • De 11:00 às 22:30",
       contactCardTitle: "Contato & Delivery",
-      footerCopyHtml: '&copy; <span id="currentYear">2026</span> por Restaurante e Soparia da Sabbá',
+      footerCopy: '&copy; <span id="currentYear">2026</span> por Restaurante e Soparia da Sabbá',
       footerSub:
         "Av. Gov. José Lindoso, 1394 - Novo Aleixo, Manaus/AM • Cardápio digital para consulta",
       backToTopLink: "Voltar ao topo ↑",
@@ -87,8 +87,8 @@
       navDelivery: "Delivery Orders",
       navDeliveryCompact: "Delivery",
       navDeliveryMobile: "Delivery Orders (Linktree)",
-      paymentNoticeHtml:
-        '<strong>Cash, PIX, and Visa, Mastercard &amp; Elo debit/credit cards</strong> accepted <strong class="notice-warning">(meal vouchers not accepted!)</strong>',
+      paymentNotice:
+        'We accept <strong>cash, PIX, and debit/credit cards (VISA, MASTERCARD, and ELO)</strong>. <strong class="notice-warning">Meal vouchers are not accepted.</strong>',
       ordersNotice: "Catering & pre-orders welcome!",
       a11yLabel: "Accessibility",
       contrastBtn: "High Contrast",
@@ -111,7 +111,7 @@
       deliveryLabel: "Delivery",
       deliveryValue: "Daily • 11:00 AM – 10:30 PM",
       contactCardTitle: "Contact & Delivery",
-      footerCopyHtml: '&copy; <span id="currentYear">2026</span> Restaurante e Soparia da Sabbá',
+      footerCopy: '&copy; <span id="currentYear">2026</span> Restaurante e Soparia da Sabbá',
       footerSub:
         "Av. Gov. José Lindoso, 1394 - Novo Aleixo, Manaus/AM • Digital menu for browsing",
       backToTopLink: "Back to top ↑",

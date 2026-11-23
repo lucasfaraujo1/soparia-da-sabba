@@ -10,7 +10,7 @@ window.SOPARIA_DATA = {
     deliveryUrl: "https://linktr.ee/sopariadasabba",
     serviceFee: "Taxa de Serviço 10%",
     paymentNotice:
-      "Aceitamos pagamento em dinheiro, PIX, cartão débito e crédito VISA, MASTERCARD e ELO (não aceitamos vale-refeição!)",
+      "Aceitamos pagamento em dinheiro, pix, cartões de débito e crédito (VISA, MASTERCARD e ELO). Não aceitamos vale-refeição.",
     ordersNotice: "Aceitamos encomendas!",
     address: {
       street: "Av. Gov. José Lindoso, 1394",
