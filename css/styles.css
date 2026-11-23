@@ -14,8 +14,8 @@
   --border-subtle: rgba(255, 255, 255, 0.08);
   --border-gold: rgba(219, 148, 33, 0.55);
   --text-primary: #ffffff;
-  --text-secondary: #cfcfcf;
-  --text-muted: #9e9e9e;
+  --text-secondary: #d4d4d4;
+  --text-muted: #b3b3b3;
   --text-dark: #1d1d1d;
   --status-open: #34d399;
   --status-delivery: #fbbf24;
@@ -72,6 +72,47 @@ input {
   max-width: 1120px;
   margin-inline: auto;
   padding-inline: 16px;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+.skip-link {
+  position: fixed;
+  top: -120px;
+  left: 16px;
+  z-index: 200;
+  padding: 10px 16px;
+  border-radius: var(--radius-sm);
+  background-color: var(--brand-orange);
+  color: var(--text-dark);
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.45);
+  transition: top 0.15s ease;
+}
+
+.skip-link:focus {
+  top: 14px;
+  outline: 3px solid #ffffff;
+  outline-offset: 2px;
+}
+
+:focus-visible {
+  outline: 3px solid var(--brand-orange);
+  outline-offset: 2px;
 }
 
 /* =========================================================
@@ -381,11 +422,109 @@ input {
 }
 
 /* =========================================================
+   Accessibility Bar (Discreet Top Menu Strip)
+   ========================================================= */
+
+.a11y-bar-wrap {
+  background-color: #202020;
+  border-bottom: 1px solid var(--border-subtle);
+  padding-block: 8px;
+}
+
+.a11y-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 14px;
+}
+
+.a11y-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.a11y-label svg {
+  color: var(--brand-orange);
+  flex-shrink: 0;
+}
+
+.a11y-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.a11y-font-group {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background-color: var(--bg-surface);
+}
+
+.a11y-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  min-height: 34px;
+  padding: 5px 11px;
+  border: 0;
+  background: transparent;
+  color: var(--text-primary);
+  font-size: 0.76rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: background-color 0.18s ease, color 0.18s ease;
+}
+
+.a11y-font-group .a11y-btn + .a11y-btn {
+  border-left: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.a11y-btn:hover:not(:disabled) {
+  background-color: rgba(255, 148, 0, 0.16);
+  color: var(--brand-orange);
+}
+
+.a11y-btn:disabled {
+  opacity: 0.42;
+  cursor: not-allowed;
+}
+
+.a11y-btn--reset {
+  font-size: 0.72rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  min-width: 48px;
+}
+
+.a11y-btn--contrast {
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  background-color: var(--bg-surface);
+  padding-inline: 12px;
+}
+
+.a11y-btn--contrast[aria-pressed="true"] {
+  background-color: var(--brand-orange);
+  border-color: var(--brand-orange);
+  color: var(--text-dark);
+}
+
+/* =========================================================
    Menu Intro & Search
    ========================================================= */
 
 .menu-intro {
-  padding-top: 28px;
+  padding-top: 22px;
   padding-bottom: 18px;
 }
 
@@ -1267,4 +1406,217 @@ input {
     transition-duration: 0.01ms !important;
     animation-duration: 0.01ms !important;
   }
+}
+
+/* =========================================================
+   High-Contrast Light Mode (Accessibility)
+   ========================================================= */
+
+html.high-contrast {
+  --bg-page: #ffffff;
+  --bg-surface: #ffffff;
+  --bg-surface-alt: #f1f1f1;
+  --bg-notice: #f4f4f4;
+  --border-subtle: #222222;
+  --border-gold: #111111;
+  --text-primary: #111111;
+  --text-secondary: #222222;
+  --text-muted: #333333;
+  --brand-orange: #b45309;
+  --brand-orange-hover: #92400e;
+}
+
+html.high-contrast :focus-visible {
+  outline: 3px solid #111111;
+  outline-offset: 2px;
+}
+
+html.high-contrast .site-header {
+  background-color: #ff9400;
+  color: #111111;
+  border-bottom: 2px solid #111111;
+}
+
+html.high-contrast .site-header.is-scrolled {
+  background-color: #ffffff;
+  color: #111111;
+  border-bottom: 2px solid #111111;
+}
+
+html.high-contrast .site-header.is-scrolled .btn-delivery {
+  background-color: #111111;
+  color: #ffffff;
+  border-color: #111111;
+}
+
+html.high-contrast .site-header:not(.is-scrolled) .nav-link:hover,
+html.high-contrast .site-header:not(.is-scrolled) .nav-link.active {
+  color: #111111;
+}
+
+html.high-contrast .mobile-drawer {
+  background-color: #ffffff;
+  color: #111111;
+  border-top: 2px solid #111111;
+}
+
+html.high-contrast .mobile-nav-link:hover {
+  background-color: #f1f1f1;
+  color: #92400e;
+}
+
+html.high-contrast .mobile-nav-link--highlight {
+  background-color: #ffedd5;
+  color: #9a3412;
+}
+
+html.high-contrast .notice-strip,
+html.high-contrast .a11y-bar-wrap,
+html.high-contrast .category-bar-wrap {
+  background-color: #f4f4f4;
+  border-color: #222222;
+}
+
+html.high-contrast .notice-pill {
+  background-color: #111111;
+  color: #ffffff;
+  border-color: #111111;
+}
+
+html.high-contrast .payment-notice .notice-warning {
+  color: #991b1b;
+}
+
+html.high-contrast .a11y-font-group,
+html.high-contrast .a11y-btn--contrast,
+html.high-contrast .search-box input,
+html.high-contrast .category-pill,
+html.high-contrast .menu-item,
+html.high-contrast .contact-card,
+html.high-contrast .empty-state {
+  border-color: #222222;
+  background-color: #ffffff;
+}
+
+html.high-contrast .a11y-font-group .a11y-btn + .a11y-btn {
+  border-left-color: #222222;
+}
+
+html.high-contrast .a11y-btn:hover:not(:disabled) {
+  background-color: #e5e5e5;
+  color: #111111;
+}
+
+html.high-contrast .a11y-btn--contrast[aria-pressed="true"] {
+  background-color: #111111;
+  border-color: #111111;
+  color: #ffffff;
+}
+
+html.high-contrast .search-box input:focus {
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(17, 17, 17, 0.2);
+}
+
+html.high-contrast .clear-search {
+  background: #e5e5e5;
+  color: #111111;
+}
+
+html.high-contrast .category-pill {
+  color: #111111;
+}
+
+html.high-contrast .category-pill.is-active {
+  background-color: #111111;
+  border-color: #111111;
+  color: #ffffff;
+}
+
+html.high-contrast .menu-item:hover {
+  background-color: #fafafa;
+  border-color: #111111;
+}
+
+html.high-contrast .menu-item--featured {
+  background: #fff7ed;
+  border: 2px solid #111111;
+}
+
+html.high-contrast .menu-item--featured .menu-item-desc {
+  color: #111111;
+}
+
+html.high-contrast .item-badge {
+  background-color: #111111;
+  color: #ffffff;
+}
+
+html.high-contrast .menu-item-dots {
+  border-bottom-color: rgba(17, 17, 17, 0.45);
+}
+
+html.high-contrast .menu-item-price,
+html.high-contrast .service-fee,
+html.high-contrast .subcategory-title,
+html.high-contrast .category-header-plain .category-title,
+html.high-contrast .hours-label,
+html.high-contrast .contact-action,
+html.high-contrast .footer-top-link {
+  color: #9a3412;
+}
+
+html.high-contrast .contact-section {
+  background-color: #f4f4f4;
+  border-top: 2px solid #111111;
+}
+
+html.high-contrast .contact-hero-overlay h2 {
+  color: #ffffff;
+}
+
+html.high-contrast .contact-kicker {
+  color: #ffbe55;
+}
+
+html.high-contrast .contact-card-icon {
+  background-color: #111111;
+  color: #ffffff;
+}
+
+html.high-contrast .btn-primary-full {
+  background-color: #111111;
+  color: #ffffff;
+}
+
+html.high-contrast .btn-primary-full:hover {
+  background-color: #2b2b2b;
+}
+
+html.high-contrast .social-btn {
+  background-color: #ffffff;
+  color: #111111;
+  border-color: #222222;
+}
+
+html.high-contrast .social-btn:hover {
+  background-color: #111111;
+  color: #ffffff;
+}
+
+html.high-contrast .site-footer {
+  background-color: #eaeaea;
+  border-top: 2px solid #111111;
+}
+
+html.high-contrast .visitor-counter {
+  background-color: #ffffff;
+  border-color: #222222;
+  color: #111111;
+}
+
+html.high-contrast .back-to-top {
+  background-color: #111111;
+  color: #ffffff;
+  border-color: #ffffff;
 }

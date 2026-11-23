@@ -18,6 +18,11 @@
   const backToTopBtn = document.getElementById("backToTop");
   const currentYearEl = document.getElementById("currentYear");
   const visitorCountText = document.getElementById("visitorCountText");
+  const fontDecreaseBtn = document.getElementById("fontDecrease");
+  const fontResetBtn = document.getElementById("fontReset");
+  const fontIncreaseBtn = document.getElementById("fontIncrease");
+  const contrastToggleBtn = document.getElementById("contrastToggle");
+  const a11yLive = document.getElementById("a11yLive");
 
   let activeCategoryId = data.categories[0] ? data.categories[0].id : "";
   let scrollRafPending = false;
@@ -476,11 +481,119 @@
       });
   }
 
+  function announceA11y(message) {
+    if (!a11yLive) return;
+    a11yLive.textContent = "";
+    requestAnimationFrame(() => {
+      a11yLive.textContent = message;
+    });
+  }
+
+  function setupAccessibility() {
+    const FONT_STEPS = [90, 100, 112.5, 125, 137.5];
+    const DEFAULT_IDX = 1;
+    const STORAGE_FONT_KEY = "soparia_font_scale_idx";
+    const STORAGE_CONTRAST_KEY = "soparia_high_contrast";
+
+    let fontIdx = DEFAULT_IDX;
+    let highContrast = false;
+
+    try {
+      const savedIdx = parseInt(localStorage.getItem(STORAGE_FONT_KEY), 10);
+      if (Number.isInteger(savedIdx) && savedIdx >= 0 && savedIdx < FONT_STEPS.length) {
+        fontIdx = savedIdx;
+      }
+      highContrast = localStorage.getItem(STORAGE_CONTRAST_KEY) === "1";
+    } catch (_) {
+      // Ignora caso localStorage esteja bloqueado
+    }
+
+    function applyFontScale(announce) {
+      const scale = FONT_STEPS[fontIdx];
+      document.documentElement.style.fontSize = `${scale}%`;
+      if (fontResetBtn) {
+        fontResetBtn.textContent = `${Math.round(scale)}%`;
+        fontResetBtn.disabled = fontIdx === DEFAULT_IDX;
+      }
+      if (fontDecreaseBtn) {
+        fontDecreaseBtn.disabled = fontIdx <= 0;
+      }
+      if (fontIncreaseBtn) {
+        fontIncreaseBtn.disabled = fontIdx >= FONT_STEPS.length - 1;
+      }
+      try {
+        localStorage.setItem(STORAGE_FONT_KEY, String(fontIdx));
+      } catch (_) {}
+
+      if (announce) {
+        announceA11y(`Tamanho do texto ajustado para ${Math.round(scale)} por cento.`);
+      }
+    }
+
+    function applyContrast(announce) {
+      document.documentElement.classList.toggle("high-contrast", highContrast);
+      if (contrastToggleBtn) {
+        contrastToggleBtn.setAttribute("aria-pressed", String(highContrast));
+      }
+      const themeMeta = document.querySelector('meta[name="theme-color"]');
+      if (themeMeta) {
+        themeMeta.setAttribute("content", highContrast ? "#FFFFFF" : "#FF9400");
+      }
+      try {
+        localStorage.setItem(STORAGE_CONTRAST_KEY, highContrast ? "1" : "0");
+      } catch (_) {}
+
+      if (announce) {
+        announceA11y(
+          highContrast ? "Modo alto contraste ativado." : "Modo alto contraste desativado."
+        );
+      }
+    }
+
+    if (fontDecreaseBtn) {
+      fontDecreaseBtn.addEventListener("click", () => {
+        if (fontIdx > 0) {
+          fontIdx -= 1;
+          applyFontScale(true);
+        }
+      });
+    }
+
+    if (fontIncreaseBtn) {
+      fontIncreaseBtn.addEventListener("click", () => {
+        if (fontIdx < FONT_STEPS.length - 1) {
+          fontIdx += 1;
+          applyFontScale(true);
+        }
+      });
+    }
+
+    if (fontResetBtn) {
+      fontResetBtn.addEventListener("click", () => {
+        if (fontIdx !== DEFAULT_IDX) {
+          fontIdx = DEFAULT_IDX;
+          applyFontScale(true);
+        }
+      });
+    }
+
+    if (contrastToggleBtn) {
+      contrastToggleBtn.addEventListener("click", () => {
+        highContrast = !highContrast;
+        applyContrast(true);
+      });
+    }
+
+    applyFontScale(false);
+    applyContrast(false);
+  }
+
   // Inicialização
   if (currentYearEl) {
     currentYearEl.textContent = String(new Date().getFullYear());
   }
 
+  setupAccessibility();
   renderCategoryPills(data.categories);
   renderMenu("");
   applyScrollState();

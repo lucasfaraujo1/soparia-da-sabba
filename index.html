@@ -38,6 +38,8 @@
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
+  <a href="#cardapio" class="skip-link">Pular para o cardápio</a>
+
   <!-- Cabeçalho Principal -->
   <header class="site-header" id="siteHeader">
     <div class="container header-inner">
@@ -106,6 +108,31 @@
     </section>
 
     <div class="menu-area">
+      <!-- Barra Discreta de Acessibilidade -->
+      <div class="a11y-bar-wrap" role="region" aria-label="Ferramentas de acessibilidade">
+        <div class="container a11y-bar">
+          <div class="a11y-label">
+            <svg viewBox="0 0 24 24" fill="currentColor" width="18" height="18" aria-hidden="true">
+              <path d="M12 2a10 10 0 1 0 10 10A10.011 10.011 0 0 0 12 2Zm0 3a1.75 1.75 0 1 1-1.75 1.75A1.75 1.75 0 0 1 12 5Zm4.75 5.25h-3.25v2.35l1.55 4.82a.75.75 0 1 1-1.43.46L12.35 14h-.7l-1.27 3.88a.75.75 0 1 1-1.43-.46l1.55-4.82v-2.35H7.25a.75.75 0 0 1 0-1.5h9.5a.75.75 0 0 1 0 1.5Z"/>
+            </svg>
+            <span>Acessibilidade</span>
+          </div>
+          <div class="a11y-controls">
+            <div class="a11y-font-group" role="group" aria-label="Tamanho da letra">
+              <button type="button" id="fontDecrease" class="a11y-btn" aria-label="Diminuir tamanho da letra" title="Diminuir letra">A-</button>
+              <button type="button" id="fontReset" class="a11y-btn a11y-btn--reset" aria-label="Restaurar tamanho padrão da letra" title="Tamanho padrão">100%</button>
+              <button type="button" id="fontIncrease" class="a11y-btn" aria-label="Aumentar tamanho da letra" title="Aumentar letra">A+</button>
+            </div>
+            <button type="button" id="contrastToggle" class="a11y-btn a11y-btn--contrast" aria-pressed="false" title="Alternar alto contraste / modo claro">
+              <svg viewBox="0 0 20 20" fill="currentColor" width="15" height="15" aria-hidden="true">
+                <path fill-rule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm0-14a6 6 0 0 0 0 12V4Z" clip-rule="evenodd" />
+              </svg>
+              <span>Alto Contraste</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
       <!-- Cabeçalho do Cardápio + Busca -->
       <section class="menu-intro" id="cardapio">
         <div class="container menu-intro-inner">
@@ -146,7 +173,8 @@
       <!-- Container do Cardápio Renderizado via JS -->
       <section class="menu-content" aria-label="Itens do cardápio">
         <div class="container">
-          <div id="searchSummary" class="search-summary" hidden></div>
+          <div id="searchSummary" class="search-summary" role="status" aria-live="polite" hidden></div>
+          <div id="a11yLive" class="sr-only" role="status" aria-live="polite"></div>
           <div id="menuContainer" class="menu-sections"></div>
           <div id="emptyState" class="empty-state" hidden>
             <p class="empty-state-title">Nenhum item encontrado</p>
